@@ -7,7 +7,23 @@ const fakeData = require('./fakeData');
 const serverEngine = new Koa();
 const router = new Router();
 
-serverEngine.use(cors());
+serverEngine.use(
+  cors({
+    origin: '*',
+    allowMethods: [
+      'GET',
+      'POST',
+      'DELETE',
+      'OPTIONS',
+      'allTickets',
+      'createTicket',
+      'deleteById',
+      'updateById',
+      'ticketById',
+    ],
+    allowHeaders: ['Content-Type'],
+  })
+);
 serverEngine.use(koaBody({ urlencoded: true, multipart: true }));
 
 const messages = [
