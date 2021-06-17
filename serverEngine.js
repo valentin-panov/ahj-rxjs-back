@@ -10,18 +10,7 @@ const router = new Router();
 serverEngine.use(
   cors({
     origin: '*',
-    allowMethods: [
-      'GET',
-      'POST',
-      'DELETE',
-      'OPTIONS',
-      'allTickets',
-      'createTicket',
-      'deleteById',
-      'updateById',
-      'ticketById',
-    ],
-    allowHeaders: ['Content-Type'],
+    allowMethods: ['GET', 'OPTIONS'],
   })
 );
 serverEngine.use(koaBody({ urlencoded: true, multipart: true }));
@@ -67,6 +56,6 @@ router.get('/messages/clear', async (ctx) => {
   };
 });
 
-serverEngine.use(router.routes());
+serverEngine.use(router.routes()).use(router.allowedMethods());
 
 module.exports = serverEngine;
